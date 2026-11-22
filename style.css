@@ -37,6 +37,12 @@ body {
     border-radius: 16px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--blue-glow);
     overflow: hidden;
+    animation: fadeIn 0.7s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* VS Code / GitHub Header */
@@ -107,11 +113,32 @@ body {
     border-radius: 50%;
 }
 
+/* Username & Typing Effect */
 .username {
     font-size: 1.85rem;
     font-weight: 800;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.typing-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--blue-primary);
+    width: 0;
+    animation: typing 1.6s steps(12, end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 13.5ch; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
 }
 
 .tag {
@@ -121,11 +148,37 @@ body {
     font-weight: 600;
 }
 
+/* Role Badges */
+.badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: #93c5fd;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge i {
+    color: var(--blue-primary);
+}
+
 .bio {
     color: var(--text-muted);
     font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 28px;
+    margin-bottom: 26px;
     padding: 0 8px;
 }
 
