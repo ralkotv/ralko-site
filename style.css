@@ -45,7 +45,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* VS Code Header with Eye Counter */
+/* Terminal Header */
 .terminal-bar {
     background: #04070d;
     padding: 10px 16px;
@@ -67,11 +67,6 @@ body {
 
 .visitor-counter i {
     font-size: 0.85rem;
-}
-
-.visitor-counter img {
-    height: 18px;
-    border-radius: 3px;
 }
 
 .git-branch {
@@ -148,7 +143,7 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .badge {
@@ -168,16 +163,33 @@ body {
     color: var(--blue-primary);
 }
 
-.bio {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 26px;
-    padding: 0 8px;
+/* Professional Bio Card Box */
+.bio-card {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+    text-align: left;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.bio strong {
+.bio-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--text-main);
+    margin-bottom: 6px;
+    font-family: 'Inter', sans-serif;
+}
+
+.bio-card .highlight {
+    color: var(--blue-primary);
+}
+
+.bio-card p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
 }
 
 /* Links Buttons */
@@ -232,6 +244,11 @@ body {
 .discord i { color: #5865F2; }
 
 /* Footer */
-<footer>
-    <p><i class="fa-solid fa-code"></i> Built in VS Code &bull; Hosted on <i class="fa-brands fa-github"></i> GitHub</p>
-</footer>
+footer {
+    margin-top: 24px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
