@@ -113,7 +113,7 @@ body {
     border-radius: 50%;
 }
 
-/* Username & Typing Effect */
+/* Username & Typing Effect (M-qadd 3la RALKO) */
 .username {
     font-size: 1.85rem;
     font-weight: 800;
@@ -129,23 +129,16 @@ body {
     white-space: nowrap;
     border-right: 3px solid var(--blue-primary);
     width: 0;
-    animation: typing 1.6s steps(12, end) forwards, blink 0.8s infinite;
+    animation: typing 1s steps(5, end) forwards, blink 0.8s infinite;
 }
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 13.5ch; }
+    to { width: 5.5ch; }
 }
 
 @keyframes blink {
     50% { border-color: transparent; }
-}
-
-.tag {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.95rem;
-    color: var(--blue-primary);
-    font-weight: 600;
 }
 
 /* Role Badges */
