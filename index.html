@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RALKO | Official Links & Hub</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="bg-glow"></div>
 
-    <!-- Background Audio Player (Fixed Widget) -->
+    <!-- Click to Enter Overlay (Ensures Audio Auto-Plays Perfectly) -->
+    <div id="enter-overlay" class="enter-overlay">
+        <div class="enter-box">
+            <img src="profile.png" alt="RALKO" class="enter-avatar">
+            <h2>WELCOME TO RALKO</h2>
+            <p>Click anywhere or tap to enter</p>
+            <button class="enter-btn"><i class="fa-solid fa-play"></i> ENTER HUB</button>
+        </div>
+    </div>
+
+    <!-- Background Audio Player -->
     <audio id="bg-music" src="https://a.top4top.io/m_39792evr41.mp3" loop></audio>
     <div class="music-widget" id="music-toggle" title="Play / Pause Music">
-        <i class="fa-solid fa-music" id="music-icon"></i>
-        <span id="music-text">Play OST</span>
+        <i class="fa-solid fa-volume-high" id="music-icon"></i>
+        <span id="music-text">Playing</span>
     </div>
 
     <main class="container">
@@ -87,7 +97,7 @@
         </div>
     </main>
 
-    <!-- Scripts (Visitor Counter & Music Player Control) -->
+    <!-- Scripts -->
     <script>
         // Visitor Counter
         fetch('https://abacus.jasoncameron.dev/hit/ralko-portfolio/visits')
@@ -101,20 +111,32 @@
                 localStorage.setItem('ralko_views', Number(localViews) + 1);
             });
 
-        // Music Player Logic
+        // Overlay & Music Control
+        const overlay = document.getElementById('enter-overlay');
         const music = document.getElementById('bg-music');
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
         const musicText = document.getElementById('music-text');
 
-        music.volume = 0.5; // Sound level (50%)
+        music.volume = 0.6;
+
+        overlay.addEventListener('click', () => {
+            music.play().then(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 500);
+            }).catch(() => {
+                overlay.style.display = 'none';
+            });
+        });
 
         musicToggle.addEventListener('click', () => {
             if (music.paused) {
                 music.play();
                 musicIcon.className = "fa-solid fa-volume-high";
                 musicText.innerText = "Playing";
-                musicToggle.style.borderColor = "#22c55e";
+                musicToggle.style.borderColor = "#3b82f6";
             } else {
                 music.pause();
                 musicIcon.className = "fa-solid fa-volume-xmark";
@@ -122,16 +144,6 @@
                 musicToggle.style.borderColor = "#ff0000";
             }
         });
-
-        // Try to autoplay on first interaction if blocked by browser
-        window.addEventListener('click', () => {
-            if (music.paused && music.currentTime === 0) {
-                music.play().then(() => {
-                    musicIcon.className = "fa-solid fa-volume-high";
-                    musicText.innerText = "Playing";
-                }).catch(() => {});
-            }
-        }, { once: true });
     </script>
 </body>
 </html>
