@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RALKO | Official Links & Hub</title>
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -21,8 +21,7 @@
         </div>
     </div>
 
-    <!-- Background Audio Player (Linked to local music.mp3) -->
-    <audio id="bg-music" src="music.mp3" preload="auto" loop></audio>
+    <!-- Music Control Button -->
     <div class="music-widget" id="music-toggle" title="Play / Pause Music">
         <i class="fa-solid fa-volume-high" id="music-icon"></i>
         <span id="music-text">Playing</span>
@@ -111,28 +110,22 @@
                 localStorage.setItem('ralko_views', Number(localViews) + 1);
             });
 
-        // Overlay & Music Force Play
+        // Direct JavaScript Audio Initialization (No local file needed)
+        const music = new Audio('https://a.top4top.io/m_39792evr41.mp3');
+        music.loop = true;
+        music.volume = 1.0;
+
         const overlay = document.getElementById('enter-overlay');
-        const music = document.getElementById('bg-music');
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
         const musicText = document.getElementById('music-text');
 
-        music.volume = 1.0;
-
         overlay.addEventListener('click', () => {
-            music.play().then(() => {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 500);
-            }).catch((error) => {
-                console.log("Audio play blocked:", error);
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 500);
-            });
+            music.play().catch(err => console.log(err));
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
         });
 
         musicToggle.addEventListener('click', () => {
