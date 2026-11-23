@@ -249,3 +249,36 @@ footer {
     font-size: 0.75rem;
     color: var(--text-muted);
 }
+
+/* Floating Music Player Widget */
+.music-widget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(13, 21, 38, 0.9);
+    border: 2px solid #3b82f6;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    transition: all 0.3s ease;
+}
+
+.music-widget:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+    border-color: #ffffff;
+}
+
+.music-widget i {
+    color: #3b82f6;
+    font-size: 0.9rem;
+}
