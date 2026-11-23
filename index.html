@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RALKO | Official Links & Hub</title>
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="bg-glow"></div>
+
+    <!-- Background Audio Player (Fixed Widget) -->
+    <audio id="bg-music" src="https://a.top4top.io/m_39792evr41.mp3" loop></audio>
+    <div class="music-widget" id="music-toggle" title="Play / Pause Music">
+        <i class="fa-solid fa-music" id="music-icon"></i>
+        <span id="music-text">Play OST</span>
+    </div>
 
     <main class="container">
         <!-- Terminal Header with Live Counter -->
@@ -41,7 +48,7 @@
                 <p>Welcome to the website <strong>RALKO</strong>. This website contains all the information about what I do.</p>
             </div>
 
-            <!-- All Links (YouTube, TikTok, Kick, Spotify, Discord) -->
+            <!-- All Links -->
             <div class="links">
                 <a href="https://youtube.com/@ralkotv?si=vCSwVJYwhl1GmXTS" target="_blank" class="link-card youtube">
                     <i class="fa-brands fa-youtube"></i>
@@ -80,8 +87,9 @@
         </div>
     </main>
 
-    <!-- Live Visitor Counter Script -->
+    <!-- Scripts (Visitor Counter & Music Player Control) -->
     <script>
+        // Visitor Counter
         fetch('https://abacus.jasoncameron.dev/hit/ralko-portfolio/visits')
             .then(res => res.json())
             .then(data => {
@@ -92,6 +100,38 @@
                 document.getElementById('views-count').innerText = localViews;
                 localStorage.setItem('ralko_views', Number(localViews) + 1);
             });
+
+        // Music Player Logic
+        const music = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+
+        music.volume = 0.5; // Sound level (50%)
+
+        musicToggle.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                musicIcon.className = "fa-solid fa-volume-high";
+                musicText.innerText = "Playing";
+                musicToggle.style.borderColor = "#22c55e";
+            } else {
+                music.pause();
+                musicIcon.className = "fa-solid fa-volume-xmark";
+                musicText.innerText = "Muted";
+                musicToggle.style.borderColor = "#ff0000";
+            }
+        });
+
+        // Try to autoplay on first interaction if blocked by browser
+        window.addEventListener('click', () => {
+            if (music.paused && music.currentTime === 0) {
+                music.play().then(() => {
+                    musicIcon.className = "fa-solid fa-volume-high";
+                    musicText.innerText = "Playing";
+                }).catch(() => {});
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
